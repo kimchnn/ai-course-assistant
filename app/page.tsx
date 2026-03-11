@@ -1,17 +1,10 @@
-import Sidebar from "./components/sidebar";
+import AppSidebar from "@/components/AppSidebar";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-
-      <main className="flex-1 p-8">
-        <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">AI Course Assistant</h1>
-          <button className="rounded-xl border px-4 py-2 font-medium hover:bg-gray-100">
-            Login
-          </button>
-        </div>
+     <div className="w-full flex justify-center">
+      <div className="w-full max-w-5xl p-8">
+          <h1 className="text-3xl font-bold mb-8">AI Course Assistant</h1>
 
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">Upcoming Assessments</h2>
@@ -60,7 +53,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+      </div>
   );
 }

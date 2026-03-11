@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/sidebar";
+import AppSidebar from "@/components/AppSidebar";
 
 export default async function QuizPage({
   params,
@@ -9,7 +9,7 @@ export default async function QuizPage({
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <AppSidebar />
       <main className="flex-1 p-8">
         <h1 className="text-3xl font-bold">Practice Quiz</h1>
         <p className="mt-2 text-gray-600">

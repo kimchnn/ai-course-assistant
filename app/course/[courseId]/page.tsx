@@ -1,5 +1,5 @@
-import Sidebar from "@/app/components/sidebar";
-import FeatureCard from "@/app/components/featureCard";
+import AppSidebar from "@/components/AppSidebar";
+import FeatureCard from "@/components/FeatureCard";
 
 export default async function CoursePage({
   params,
@@ -10,12 +10,10 @@ export default async function CoursePage({
   const courseName = courseId.toUpperCase();
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-
-      <main className="flex-1 p-8">
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-5xl p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">{courseName}</h1>
+          <h1 className="text-3xl font-bold mb-8">{courseName}</h1>
           <p className="mt-2 text-gray-600">
             Upload materials and use AI study tools for this course.
           </p>
@@ -94,7 +92,7 @@ export default async function CoursePage({
             />
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+      </div>
   );
 }
