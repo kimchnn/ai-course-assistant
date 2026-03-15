@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Home, BookOpen, Plus } from "lucide-react";
 
@@ -15,9 +17,44 @@ import {
 } from "@/components/ui/sidebar";
 
 import { AddCourseModal } from "./AddCourseModal";
-import { courses } from "@/data/courses";
+import { courses as initialCourses } from "@/data/courses";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+
+function makeCourseId(name: string) {
+  return name.toLowerCase().replace(/\s+/g, "");
+}
 
 export default function AppSidebar() {
+  const [courses, setCourses] = useState(initialCourses);
+  const router = useRouter();
+
+  function handleCreateCourse(courseName: string) {
+  const trimmedName = courseName.trim();
+  if (!trimmedName) return;
+
+  const newCourse = {
+    id: makeCourseId(trimmedName),
+    name: trimmedName,
+  };
+
+  let wasAdded = false;
+
+  setCourses((prevCourses) => {
+    const alreadyExists = prevCourses.some(
+      (course) => course.id === newCourse.id
+    );
+
+    if (alreadyExists) return prevCourses;
+
+    wasAdded = true;
+    return [...prevCourses, newCourse];
+  });
+
+  router.push(`/course/${newCourse.id}`);
+}
+  
   return (
     <Sidebar className="border-r bg-white">
       <SidebarHeader className="border-b px-4 py-4">
@@ -67,7 +104,7 @@ export default function AppSidebar() {
               ))}
 
               <SidebarMenuItem className="mt-2">
-                <AddCourseModal />
+                <AddCourseModal onCreateCourse={handleCreateCourse} />
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

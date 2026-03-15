@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -13,10 +16,30 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function AddCourseModal() {
-  return (
-    <Dialog>
+type AddCourseModalProps = {
+  onCreateCourse: (courseName: string) => void;
+};
 
+export function AddCourseModal({
+  onCreateCourse,
+}: AddCourseModalProps) {
+  const [open, setOpen] = useState(false);
+  const [courseName, setCourseName] = useState("");
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const trimmedName = courseName.trim();
+    if (!trimmedName) return;
+
+    onCreateCourse(trimmedName);
+    setCourseName("");
+    setOpen(false);
+    
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
         variant="outline"
@@ -25,7 +48,7 @@ export function AddCourseModal() {
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-sm">
-        <form>
+        <form onSubmit={handleSubmit}>
 
           <DialogHeader>
             <DialogTitle>Add Course</DialogTitle>
@@ -38,8 +61,9 @@ export function AddCourseModal() {
             <Label htmlFor="course-name">Course Name</Label>
             <Input
               id="course-name"
-              name="name"
-              placeholder="CPSC 310"
+              value={courseName}
+              onChange={(e) => setCourseName(e.target.value)}
+              placeholder="CPSC 110"
             />
           </div>
 

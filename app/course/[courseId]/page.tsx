@@ -1,5 +1,6 @@
 import AppSidebar from "@/components/AppSidebar";
 import FeatureCard from "@/components/FeatureCard";
+import UploadMaterials from "@/components/UploadMaterials";
 
 export default async function CoursePage({
   params,
@@ -11,7 +12,7 @@ export default async function CoursePage({
 
   return (
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-5xl p-8">
+        <div className="w-full max-w-6xl p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-8">{courseName}</h1>
           <p className="mt-2 text-gray-600">
@@ -25,17 +26,17 @@ export default async function CoursePage({
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Upcoming</h3>
-              <p className="text-gray-700">Midterm 1 — Oct 10</p>
+              {/* <p className="text-gray-700">Midterm 1 — Oct 10</p> */}
             </div>
 
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Weak Topics</h3>
-              <p className="text-gray-700">Recursion, tree traversal</p>
+              {/* <p className="text-gray-700">Recursion, tree traversal</p> */}
             </div>
 
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Readiness</h3>
-              <p className="mb-2 text-gray-700">68%</p>
+              {/* <p className="mb-2 text-gray-700">68%</p> */}
               <div className="h-3 rounded-full bg-gray-200">
                 <div className="h-3 w-2/3 rounded-full bg-black" />
               </div>
@@ -45,10 +46,7 @@ export default async function CoursePage({
 
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">Upload Materials</h2>
-
-          <div className="rounded-2xl border-2 border-dashed bg-gray-50 p-8 text-center text-gray-500">
-            Drag and drop files here
-          </div>
+          <UploadMaterials />
         </section>
 
         <section className="mb-8">
@@ -56,9 +54,9 @@ export default async function CoursePage({
 
           <div className="rounded-2xl border bg-white p-6 shadow-sm">
             <ul className="space-y-3 text-gray-700">
-              <li>Lecture_3.pdf</li>
+              {/* <li>Lecture_3.pdf</li>
               <li>Lecture_4.pdf</li>
-              <li>Midterm_2019.pdf</li>
+              <li>Midterm_2019.pdf</li> */}
             </ul>
           </div>
         </section>
