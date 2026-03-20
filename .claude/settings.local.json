@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git diff:*)",
+      "Bash(grep -n \"import React from\\\\|import \\\\* as React\" /Users/kimmiechan/ubc-ai-course-assistant/components/*.tsx /Users/kimmiechan/ubc-ai-course-assistant/app/**/*.tsx)",
+      "Bash(grep -n \"^[[:space:]]*{/\\\\*\\\\|^[[:space:]]*//\\\\|<!\\\\-\\\\-\" /Users/kimmiechan/ubc-ai-course-assistant/app/**/*.tsx /Users/kimmiechan/ubc-ai-course-assistant/components/*.tsx)",
+      "Bash(grep -n \"{/\\\\*\\\\|^\\\\s*//\" /Users/kimmiechan/ubc-ai-course-assistant/app/course/[courseId]/page.tsx /Users/kimmiechan/ubc-ai-course-assistant/components/*.tsx)"
+    ]
+  }
+}

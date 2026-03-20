@@ -1,87 +1,80 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { CloudUpload, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { FileUpload, FileUploadDropzone, FileUploadItem, FileUploadItemDelete, FileUploadItemMetadata, FileUploadItemPreview, FileUploadList, FileUploadTrigger } from "./ui/file-upload";
+import React from "react";
 
 export default function UploadMaterials() {
-  const [files, setFiles] = useState<File[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
+  const [files, setFiles] = React.useState<File[]>([]);
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  function handleFiles(fileList: FileList | null) {
-    if (!fileList) return;
-
-    const newFiles = Array.from(fileList);
-
-    setFiles((prev) => [...prev, ...newFiles]);
+  function handleClearAll() {
+    setFiles([]);
   }
 
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    handleFiles(e.target.files);
-  }
+  function handleProcessFiles() {
+    console.log("Files to process:", files);
 
-  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
-    e.preventDefault();
-    setIsDragging(false);
-
-    handleFiles(e.dataTransfer.files);
-  }
-
-  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
-    e.preventDefault();
-  }
-
-  function handleDragEnter() {
-    setIsDragging(true);
-  }
-
-  function handleDragLeave() {
-    setIsDragging(false);
-  }
-
-  function handleClick() {
-    fileInputRef.current?.click();
+    // TODO:
+    // send to backend
+    // extract text
+    // upload with FormData
   }
 
   return (
-    <div className="space-y-4">
+    <section className="mb-8">
+      <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <FileUpload
+            maxFiles={10}
+            maxSize={5 * 1024 * 1024}
+            value={files}
+            onValueChange={setFiles}
+            multiple
+          >
+            <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
+              <CloudUpload className="size-4" />
+              <span className="text-sm">Drag and drop or</span>
 
-      <div
-        onClick={handleClick}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        className={`cursor-pointer rounded-2xl border-2 border-dashed p-8 text-center transition
-        ${
-          isDragging
-            ? "border-blue-500 bg-blue-50"
-            : "border-gray-300 bg-gray-50 hover:bg-gray-100"
-        }`}
-      >
-        <p className="font-medium">Drag and drop files here</p>
-        <p className="text-sm text-gray-500 mt-1">or click to upload</p>
+              <FileUploadTrigger asChild>
+                <Button variant="link" size="sm" className="h-auto p-0">
+                  choose files
+                </Button>
+              </FileUploadTrigger>
+
+              <span className="text-sm">to upload</span>
+            </FileUploadDropzone>
+
+            <FileUploadList className="grid grid-cols-5 gap-3">
+              {files.map((file, index) => (
+                <FileUploadItem
+                  key={`${file.name}-${file.lastModified}-${index}`}
+                  value={file}
+                >
+                  <FileUploadItemPreview />
+                  <FileUploadItemMetadata />
+
+                  <FileUploadItemDelete asChild>
+                    <Button variant="ghost" size="icon" className="size-7">
+                      <X className="size-4" />
+                    </Button>
+                  </FileUploadItemDelete>
+                </FileUploadItem>
+              ))}
+            </FileUploadList>
+          </FileUpload>
+
+          {files.length > 0 && (
+            <div className="flex items-center justify-between">
+              <Button variant="outline" onClick={handleClearAll}>
+                Clear All
+              </Button>
+
+              <Button onClick={handleProcessFiles}>
+                Upload
+              </Button>
+            </div>
+          )}
       </div>
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        className="hidden"
-        onChange={handleInputChange}
-      />
-
-      {files.length > 0 && (
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h3 className="mb-3 font-semibold">Uploaded Documents</h3>
-
-          <ul className="space-y-2 text-gray-700">
-            {files.map((file, i) => (
-              <li key={i}>{file.name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+    </section>
   );
 }

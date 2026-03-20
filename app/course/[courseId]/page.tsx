@@ -49,17 +49,6 @@ export default async function CoursePage({
           <UploadMaterials />
         </section>
 
-        <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Uploaded Documents</h2>
-
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
-            <ul className="space-y-3 text-gray-700">
-              {/* <li>Lecture_3.pdf</li>
-              <li>Lecture_4.pdf</li>
-              <li>Midterm_2019.pdf</li> */}
-            </ul>
-          </div>
-        </section>
 
         <section>
           <h2 className="mb-4 text-2xl font-semibold">Study Tools</h2>
