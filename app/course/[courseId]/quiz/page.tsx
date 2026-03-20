@@ -1,5 +1,3 @@
-import AppSidebar from "@/components/AppSidebar";
-
 export default async function QuizPage({
   params,
 }: {
@@ -8,14 +6,11 @@ export default async function QuizPage({
   const { courseId } = await params;
 
   return (
-    <div className="flex min-h-screen">
-      <AppSidebar />
-      <main className="flex-1 p-8">
-        <h1 className="text-3xl font-bold">Practice Quiz</h1>
-        <p className="mt-2 text-gray-600">
-          Course: {courseId.toUpperCase()}
-        </p>
-      </main>
-    </div>
+    <main className="p-8">
+      <h1 className="text-3xl font-bold">Practice Quiz</h1>
+      <p className="mt-2 text-gray-600">
+        Course: {courseId.toUpperCase()}
+      </p>
+    </main>
   );
 }

@@ -1,5 +1,3 @@
-import AppSidebar from "@/components/AppSidebar";
-
 export default function HomePage() {
   return (
      <div className="w-full flex justify-center">

@@ -1,4 +1,3 @@
-import AppSidebar from "@/components/AppSidebar";
 import FeatureCard from "@/components/FeatureCard";
 import UploadMaterials from "@/components/UploadMaterials";
 
@@ -26,17 +25,14 @@ export default async function CoursePage({
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Upcoming</h3>
-              {/* <p className="text-gray-700">Midterm 1 — Oct 10</p> */}
             </div>
 
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Weak Topics</h3>
-              {/* <p className="text-gray-700">Recursion, tree traversal</p> */}
             </div>
 
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold">Readiness</h3>
-              {/* <p className="mb-2 text-gray-700">68%</p> */}
               <div className="h-3 rounded-full bg-gray-200">
                 <div className="h-3 w-2/3 rounded-full bg-black" />
               </div>

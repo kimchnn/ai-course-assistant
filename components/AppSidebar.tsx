@@ -39,8 +39,6 @@ export default function AppSidebar() {
     name: trimmedName,
   };
 
-  let wasAdded = false;
-
   setCourses((prevCourses) => {
     const alreadyExists = prevCourses.some(
       (course) => course.id === newCourse.id
@@ -48,7 +46,6 @@ export default function AppSidebar() {
 
     if (alreadyExists) return prevCourses;
 
-    wasAdded = true;
     return [...prevCourses, newCourse];
   });
 
@@ -110,12 +107,6 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
-      <SidebarFooter className="border-t px-4 py-3">
-        <p className="text-xs text-muted-foreground">
-          AI-powered study tools
-        </p>
-      </SidebarFooter>
     </Sidebar>
   );
 }

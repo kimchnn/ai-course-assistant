@@ -3,10 +3,10 @@
 import { CloudUpload, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { FileUpload, FileUploadDropzone, FileUploadItem, FileUploadItemDelete, FileUploadItemMetadata, FileUploadItemPreview, FileUploadList, FileUploadTrigger } from "./ui/file-upload";
-import React from "react";
+import { useState } from "react";
 
 export default function UploadMaterials() {
-  const [files, setFiles] = React.useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
 
   function handleClearAll() {
     setFiles([]);
@@ -31,18 +31,20 @@ export default function UploadMaterials() {
             onValueChange={setFiles}
             multiple
           >
-            <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
-              <CloudUpload className="size-4" />
-              <span className="text-sm">Drag and drop or</span>
+            {files.length === 0 && (
+              <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
+                <CloudUpload className="size-4" />
+                <span className="text-sm">Drag and drop or</span>
 
-              <FileUploadTrigger asChild>
-                <Button variant="link" size="sm" className="h-auto p-0">
-                  choose files
-                </Button>
-              </FileUploadTrigger>
+                <FileUploadTrigger asChild>
+                  <Button variant="link" size="sm" className="h-auto p-0">
+                    choose files
+                  </Button>
+                </FileUploadTrigger>
 
-              <span className="text-sm">to upload</span>
-            </FileUploadDropzone>
+                <span className="text-sm">to upload</span>
+              </FileUploadDropzone>
+            )}
 
             <FileUploadList className="grid grid-cols-5 gap-3">
               {files.map((file, index) => (
@@ -61,19 +63,21 @@ export default function UploadMaterials() {
                 </FileUploadItem>
               ))}
             </FileUploadList>
+
+            {files.length > 0 && (
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex gap-2">
+                  <FileUploadTrigger asChild>
+                    <Button variant="outline">Add More</Button>
+                  </FileUploadTrigger>
+                  <Button variant="outline" onClick={handleClearAll}>
+                    Clear All
+                  </Button>
+                </div>
+                <Button onClick={handleProcessFiles}>Upload</Button>
+              </div>
+            )}
           </FileUpload>
-
-          {files.length > 0 && (
-            <div className="flex items-center justify-between">
-              <Button variant="outline" onClick={handleClearAll}>
-                Clear All
-              </Button>
-
-              <Button onClick={handleProcessFiles}>
-                Upload
-              </Button>
-            </div>
-          )}
       </div>
     </section>
   );
