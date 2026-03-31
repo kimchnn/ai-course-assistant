@@ -1,6 +1,4 @@
-import { embedMany } from 'ai';
-
-const embeddingModel = 'openai/text-embedding-ada-002';
+// TODO: replace with LangChain + OpenAI embeddings
 
 const generateChunks = (input: string): string[] => {
   return input
@@ -13,9 +11,6 @@ export const generateEmbeddings = async (
   value: string,
 ): Promise<Array<{ embedding: number[]; content: string }>> => {
   const chunks = generateChunks(value);
-  const { embeddings } = await embedMany({
-    model: embeddingModel,
-    values: chunks,
-  });
-  return embeddings.map((e, i) => ({ content: chunks[i], embedding: e }));
+  // placeholder until LangChain OpenAIEmbeddings is wired up
+  return chunks.map(chunk => ({ content: chunk, embedding: [] }));
 };
