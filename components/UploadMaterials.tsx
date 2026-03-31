@@ -12,13 +12,28 @@ export default function UploadMaterials() {
     setFiles([]);
   }
 
-  function handleProcessFiles() {
-    console.log("Files to process:", files);
+  async function handleProcessFiles() {
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append('file', file);
 
-    // TODO:
-    // send to backend
-    // extract text
-    // upload with FormData
+      try {
+        const response = await fetch('/api/ingest', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`Failed to upload ${file.name}: ${text}`);
+        }
+
+        console.log(`Uploaded: ${file.name}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    setFiles([]);
   }
 
   return (
