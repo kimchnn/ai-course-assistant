@@ -28,31 +28,29 @@ A full-stack AI-powered study assistant that helps students understand and revie
 - Tailwind CSS
 
 ### Backend
-- FastAPI (Python)
+- Next.js API routes
 
 ### Database
 - PostgreSQL
 - pgvector (for semantic search)
 
 ### AI
-- Embeddings for document retrieval
-- LLM for summarization, quizzes, flashcards, and chat
+-  OpenAI (text-embedding-3-small for embeddings, GPT-4o-mini for chat)
+-  LangChain for PDF loading and text splitting  
 
 ## Project Status
 
 ### In development
 
-### Current progress:
-
-- Course navigation UI
-- Sidebar with dynamic course list
-- Course workspace layout
-- Feature pages (summaries, flashcards, quiz, chatbot)
-
+### Current progress:                                                                             
+  - Course navigation UI with sidebar and course list
+  - Individual course with feature pages (summaries, flashcards, quiz, chatbot)             
+  - File upload system with document management (upload + delete)                    
+  - Document-based chatbot with RAG                                                 
+  - Persistent course management (create, delete) backed by PostgreSQL
+    
 ### Planned features:
 
-- File upload system
-- PDF parsing 
-- AI-powered study tools
+- Summarized notes
 - Quiz and flashcard generation
-- Document-based chatbot
+
