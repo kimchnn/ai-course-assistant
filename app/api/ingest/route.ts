@@ -12,6 +12,11 @@ export async function POST(req: NextRequest) {
   // Step 1: Receive File
   const formData = await req.formData();
   const file = formData.get('file') as File | null;
+  const courseId = formData.get('courseId') as string | null;
+
+  if (!courseId) {
+    return NextResponse.json({ error: 'No courseId provided' }, { status: 400 });
+  }
 
   if (!file) {
     return NextResponse.json({ error: 'No file provided' }, { status: 400 });
@@ -42,7 +47,7 @@ export async function POST(req: NextRequest) {
   const vectors = await embeddings.embedDocuments(chunks.map(c => c.pageContent));
 
   // Step 4: Store in DB
-  const [resource] = await db.insert(resources).values({ content: file.name }).returning();
+  const [resource] = await db.insert(resources).values({ courseId, content: file.name }).returning();
 
   await db.insert(embeddingsTable).values(
     chunks.map((chunk, i) => ({

@@ -1,0 +1,1 @@
+ALTER TABLE "resources" ADD COLUMN "course_id" varchar(191) NOT NULL;

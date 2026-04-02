@@ -14,35 +14,11 @@ export default async function CoursePage({
         <div className="w-full max-w-6xl p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-8">{courseName}</h1>
-          <p className="mt-2 text-gray-600">
-            Upload materials and use AI study tools for this course.
-          </p>
         </div>
 
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Course Overview</h2>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-lg font-semibold">Upcoming</h3>
-            </div>
-
-            <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-lg font-semibold">Weak Topics</h3>
-            </div>
-
-            <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-lg font-semibold">Readiness</h3>
-              <div className="h-3 rounded-full bg-gray-200">
-                <div className="h-3 w-2/3 rounded-full bg-black" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">Upload Materials</h2>
-          <UploadMaterials />
+          <UploadMaterials courseId={courseId} />
         </section>
 
 

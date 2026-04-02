@@ -1,0 +1,1 @@
+ALTER TABLE "resources" ALTER COLUMN "course_id" SET DATA TYPE text;

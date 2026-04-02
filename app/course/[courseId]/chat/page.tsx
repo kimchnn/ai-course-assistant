@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 
 type Message = { role: 'user' | 'assistant'; content: string };
 
 export default function Chat() {
+  const { courseId } = useParams<{ courseId: string }>();
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -20,7 +22,7 @@ export default function Chat() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input, courseId }),
       });
 
       if (!response.ok) {

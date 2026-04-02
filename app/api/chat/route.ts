@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { OpenAIEmbeddings, ChatOpenAI } from '@langchain/openai';
-import { cosineDistance } from 'drizzle-orm';
+import { cosineDistance, eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { embeddings as embeddingsTable } from '@/lib/db/schema/embeddings';
+import { resources } from '@/lib/db/schema/resources';
 import { env } from '@/lib/env.mjs';
 
 export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
-  const { message } = await req.json();
+  const { message, courseId } = await req.json();
 
   // Step 1: Embed the user's question
   const embeddings = new OpenAIEmbeddings({
@@ -22,6 +23,8 @@ export async function POST(req: NextRequest) {
   const similarChunks = await db
     .select({ content: embeddingsTable.content })
     .from(embeddingsTable)
+    .innerJoin(resources, eq(embeddingsTable.resourceId, resources.id))
+    .where(eq(resources.courseId, courseId))
     .orderBy(similarity)
     .limit(5);
 

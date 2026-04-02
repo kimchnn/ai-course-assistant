@@ -15,6 +15,34 @@
       "when": 1774930843983,
       "tag": "0001_mighty_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775106335383,
+      "tag": "0002_wise_la_nuit",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1775106406081,
+      "tag": "0003_groovy_romulus",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1775106459244,
+      "tag": "0004_useful_union_jack",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1775107621522,
+      "tag": "0005_giant_loners",
+      "breakpoints": true
     }
   ]
 }

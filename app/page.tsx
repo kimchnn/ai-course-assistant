@@ -1,57 +1,39 @@
-export default function HomePage() {
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
+import { db } from "@/lib/db";
+import { courses } from "@/lib/db/schema/courses";
+
+export default async function HomePage() {
+  const allCourses = await db.select().from(courses).orderBy(courses.createdAt);
+
   return (
-     <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center">
       <div className="w-full max-w-5xl p-8">
-          <h1 className="text-3xl font-bold mb-8">AI Course Assistant</h1>
-
-        <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Upcoming Assessments</h2>
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
-            <ul className="space-y-3 text-gray-700">
-              <li>Assignment 1 — CPSC 310</li>
-              <li>Quiz 2 — ECON 101</li>
-              <li>Midterm 1 — CPSC 210</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Recommended Study</h2>
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
-            <ul className="space-y-3 text-gray-700">
-              <li>Review recursion concepts for CPSC 210</li>
-              <li>Practice quadtree pruning flashcards for CPSC 310</li>
-              <li>Summarize supply and demand notes for ECON 101</li>
-            </ul>
-          </div>
-        </section>
+        <h1 className="text-3xl font-bold mb-8">AI Course Assistant</h1>
 
         <section>
-          <h2 className="mb-4 text-2xl font-semibold">Course Readiness</h2>
-          <div className="rounded-2xl border bg-white p-6 shadow-sm space-y-4">
-            <div>
-              <p className="mb-1 font-medium">CPSC 310</p>
-              <div className="h-3 rounded-full bg-gray-200">
-                <div className="h-3 w-2/3 rounded-full bg-black" />
-              </div>
-            </div>
+          <h2 className="mb-4 text-2xl font-semibold">My Courses</h2>
 
-            <div>
-              <p className="mb-1 font-medium">CPSC 210</p>
-              <div className="h-3 rounded-full bg-gray-200">
-                <div className="h-3 w-1/2 rounded-full bg-black" />
-              </div>
+          {allCourses.length === 0 ? (
+            <div className="rounded-2xl border bg-white p-6 shadow-sm text-gray-500">
+              No courses yet. Add a course from the sidebar to get started.
             </div>
-
-            <div>
-              <p className="mb-1 font-medium">ECON 101</p>
-              <div className="h-3 rounded-full bg-gray-200">
-                <div className="h-3 w-3/4 rounded-full bg-black" />
-              </div>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {allCourses.map((course) => (
+                <Link
+                  key={course.id}
+                  href={`/course/${course.name.toLowerCase().replace(/\s+/g, "")}`}
+                  className="rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3"
+                >
+                  <BookOpen className="h-5 w-5 text-gray-500 shrink-0" />
+                  <span className="font-medium text-gray-800">{course.name}</span>
+                </Link>
+              ))}
             </div>
-          </div>
+          )}
         </section>
       </div>
-      </div>
+    </div>
   );
 }
